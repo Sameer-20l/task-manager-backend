@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/db");
-
-
+const Application = require("./Application");
+ 
 const User = sequelize.define("User", {
     id: {
       type: DataTypes.UUID,
@@ -37,5 +37,8 @@ const User = sequelize.define("User", {
   }, {
     timestamps: true,
   });
-
+  
+  User.hasMany(Application, { foreignKey: "user_id", onDelete: "CASCADE" });
+  Application.belongsTo(User, { foreignKey: "user_id" });
+  
   module.exports=User;

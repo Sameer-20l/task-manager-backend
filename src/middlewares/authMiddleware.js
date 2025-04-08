@@ -12,6 +12,7 @@ const authenticateJWT = async (req,res,next)=>{
     try {
        const decoded=jwt.verify(token,process.env.JWT_SECRET);
        req.user = decoded;
+       req.body.userId = decoded.userId;
        next();
     } catch (error) {
     if (!res.headersSent) {

@@ -1,9 +1,9 @@
 const User = require('../models/User');
+const {responsePayload}=require('../utils/responseModel');
+require("dotenv").config();
+const { where } = require('sequelize');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const {responsePayload}=require('../utils/responseModel');
-const { where } = require('sequelize');
-require("dotenv").config();
 
 
 const registerUser=async (req,res,next)=>{
