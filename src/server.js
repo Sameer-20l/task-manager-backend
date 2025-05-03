@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const { connectDB, sequelize } = require("./config/db");
-const authRoutes= require('./routes/userRoutes')
+const user= require('./routes/userRoutes')
 const app = express();
 
 
@@ -25,14 +25,18 @@ app.get("/test", (req, res) => {
   res.send("Task Management System API is running...");
 });
 
-app.use('/',authRoutes);
+app.use('/',user);
 
 
 connectDB();
 
-sequelize.sync()
-  .then(() => console.log("Database synchronized"))
-  .catch((err) => console.error("Sync Error:", err));
+const shouldSync = false;
+
+if (shouldSync) {
+  sequelize.sync()
+    .then(() => console.log("Database synchronized"))
+    .catch((err) => console.error("Sync Error:", err));
+}
 
 // Start Server
 const PORT = process.env.PORT || 5000;

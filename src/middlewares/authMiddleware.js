@@ -17,7 +17,7 @@ const authenticateJWT = async (req,res,next)=>{
     } catch (error) {
     if (!res.headersSent) {
         console.error('Invalid token:', error.message);
-        return res.status(400).json({ message: 'Invalid token.' });
+        return res.status(401).json(responsePayload(false,res.statusCode,"Invalid Token",null));
     }  
     }
 }

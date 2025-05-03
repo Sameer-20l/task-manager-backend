@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/db"); 
 const { customAlphabet } = require("nanoid");
+const Applicant = require("./Applicant");
 
 
 // Generate 6-character alphanumeric ID
@@ -40,7 +41,10 @@ const Application = sequelize.define("Application", {
   is_active: {
     type: DataTypes.BOOLEAN,
     defaultValue: true,
-  },
+  }
 });
+
+Application.hasMany(Applicant, { foreignKey: "application_id" , onDelete: "CASCADE" });
+Applicant.belongsTo(Application, { foreignKey: "application_id" });
 
 module.exports = Application;
